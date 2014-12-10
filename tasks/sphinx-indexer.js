@@ -3,7 +3,7 @@
 var path = require('path');
 
 module.exports = function(grunt) {
-  grunt.registerMultiTask('sphinx-indexer', 'run the sphinx indexer', function() {
+  grunt.registerTask('sphinx-indexer', 'run the sphinx indexer', function() {
 
     //DEFAULT OPTIONS GO HERE
     var options = this.options({

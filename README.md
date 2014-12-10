@@ -73,16 +73,16 @@ $> grunt sphinx-searchd:start
 ```js
 grunt.initConfig({
   watch: {
-    express: {
+    sphinx: {
       files:  [ '**/*.js' ],
       tasks:  [ 'sphinx-searchd', 'sphinx-indexer' ],
       options: {
-        spawn: false // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
+        reload : true
       }
     }
   }
 });
 
-grunt.registerTask('server', [ 'express:dev', 'watch' ])
+grunt.registerTask('server', [ 'sphinx-indexer', 'sphinx-searchd', 'watch' ])
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "grunt-express-server",
+  "name": "grunt-sphinx",
   "description": "Start sphinx from your gruntfile",
   "version": "0.0.1",
   "homepage": "https://github.com/pepperpepperpepper/grunt-sphinx",

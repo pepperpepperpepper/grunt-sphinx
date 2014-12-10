@@ -1,33 +1,35 @@
 'use strict';
 var path = require('path');
 
-module.exports = function(grunt, target) {
+module.exports = function(grunt) {
+  var target = "something to remove";
   if (!process._servers) {
     process._servers = {};
   }
-
   var done    = null;
   var server  = process._servers[target]; // Store server between live reloads to close/restart 
 
   var finished = function() {
     if (done) {
       done();
-
       done = null;
     }
   };
 
   return {
     start: function start(options) {
+      if (!process._sphinx_session) {
+        grunt.log.error("first time".red);
+        process._sphinx_session = true;
+      }else{
+        grunt.log.error("restart".red);
+      }
       var that = this;
+      if(server){ console.log("server is true!"); } else {console.log("server is false") };
+//      console.log("these are the servers" + JSON.stringify(process._servers));
+      console.log("this is target" + JSON.stringify(target))
       if (server) {
         this.stop(options);
-
-        if (grunt.task.current.flags.stop) {
-          finished();
-
-          return;
-        }
       }
 
       grunt.log.writeln('Starting '.green + (options.background ? 'background' : 'foreground') + ' Sphinx server');
@@ -48,43 +50,25 @@ module.exports = function(grunt, target) {
 //        }else{ 
           donefunc = finished;
 //        }
-//        server = grunt.util.spawn({
-        server = process._servers[target] = grunt.util.spawn({
+        server = grunt.util.spawn({
           cmd:      options.cmd,
           args:     options.args,
           env:      process.env,
           fallback: options.fallback
         }, donefunc);
-
-//        if (options.delay) {
-//          setTimeout(finished, options.delay);
-//        }
-//
-//        if (options.output) {
-//          server.stdout.on('data', function(data) {
-//            var message = "" + data;
-//            var regex = new RegExp(options.output, "gi");
-//            if (message.match(regex)) {
-//              finished();
-//            }
-//          });
-//        }
+        process._servers[target] =  
         server.stderr.on('data', function(data) {
             if (!options.debug) { 
 //              finished();
             } else {
               var message = "" + data;
-              var regex = new RegExp('debugger listening', "gi");
-              if (!message.match(regex)) {
-//                finished();
-              }
             }
           });
         server.stdout.pipe(process.stdout);
         server.stderr.pipe(process.stderr);
 
       process.on('exit', finished);
-      process.on('exit', function(){ that.stop(options);});
+//      process.on('exit', function(){ that.stop(options);});
     },
 
     stop: function stop(options) {
@@ -105,13 +89,8 @@ module.exports = function(grunt, target) {
           server = process._servers[target] = null;
         }
       }
-
-//      finished();
+      finished();
     }
   };
 };
-
-
-
-
 
