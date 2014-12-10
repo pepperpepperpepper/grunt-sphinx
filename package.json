@@ -1,0 +1,52 @@
+{
+  "name": "grunt-express-server",
+  "description": "Start sphinx from your gruntfile",
+  "version": "0.0.1",
+  "homepage": "https://github.com/pepperpepperpepper/grunt-sphinx",
+  "author": {
+    "name": "pepper",
+    "email": "pepper@scannerjammer.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pepperpepperpepper/grunt-sphinx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pepperpepperpepper/grunt-sphinx/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/pepperpepperpepper/grunt-sphinx/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "sphinx",
+    "server"
+  ],
+  "maintainers": [
+    {
+      "name": "pepper",
+      "email": "pepper@scannerjammer.com"
+    }
+  ],
+}
