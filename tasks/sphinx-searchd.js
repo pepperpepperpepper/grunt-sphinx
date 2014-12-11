@@ -26,11 +26,13 @@ var server;
     }
     //}}}
 
-   //choose action
+    //choose action
     grunt.event.once('watch',function(){
       process._watch = true;
     });
+
     var action  = this.args.shift() || 'start';
+    var done = this.async();
 
     if(process._watch && action === 'start'){
        if (typeof(options.watch_delay) !== 'number'){
@@ -38,15 +40,17 @@ var server;
          process.exit(1);
        }
        if (grunt.file.exists(options.pid_file)){
-         server['stop'](options);
-         setTimeout(function(){
-           server['start'](options);
-         }, options.watch_delay);
+         server['stop'](options, function(){
+            server['start'](options, function(){ done() });
+         });
        }else{
-         server['start'](options);
+         server['start'](options, function(){ done() });
        }
     }else{
-      server[action](options); //call start or stop
+      server[action](options, function(){ done() }); //call start or stop
     }
   });
 };
+
+
+

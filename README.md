@@ -1,6 +1,6 @@
 # grunt-sphinx
 
-> Start your sphinx server from grunt 
+> Start your sphinx search server from grunt 
 
 ## Getting Started
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
@@ -15,7 +15,9 @@ and
 ```js
 'sphinx-searchd'
 ```
-Each needs configuration from within the Gruntfile. 
+Each needs configuration from within the Gruntfile. You must specify the path to your sphinx.conf file,
+as well as the path to the pid file for sphinxd. It must match the pid file path specified in searchd block
+of your sphinx.conf.
 Here's my example setup.
 
 ### Setup

@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 //  ]);
 //}}}
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'sphinx-searchd','watch']);
+  grunt.registerTask('default', [ 'sphinx-searchd','watch']);
 //  grunt.registerTask('default', ['jshint', 'test']);
 
 };
