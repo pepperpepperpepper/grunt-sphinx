@@ -16,8 +16,8 @@ and
 'sphinx-searchd'
 ```
 Each needs configuration from within the Gruntfile. You must specify the path to your sphinx.conf file,
-as well as the path to the pid file for sphinxd. It must match the pid file path specified in searchd block
-of your sphinx.conf.
+as well as the path to the pid file for sphinxd. The pid_file path in the config must match the path 
+specified in searchd block of your sphinx.conf.
 Here's my example setup.
 
 ### Setup
@@ -32,7 +32,7 @@ Here's my example setup.
         cmd : 'sphinx-searchd',               //REQUIRED
         debug : false,
         args : [], //any additional args to pass to the searchd command
-        watch_delay : 2000, //only required if used with the grunt watch task
+        watch_delay : 200, //only required if used with the grunt watch task
       },
     },
     'sphinx-indexer': {

@@ -65,9 +65,7 @@ module.exports = function(grunt) {
       process.kill(pid, 'SIGTERM');
       var retries = 3;
       (function recursiveSync(){
-        grunt.log.error('Hey there'.red);
         if (!grunt.file.exists(options.pid_file)){
-          grunt.log.error('Hey its dead'.red);
           return callback();
         }
         if (! retries){

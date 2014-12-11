@@ -41,13 +41,13 @@ var server;
        }
        if (grunt.file.exists(options.pid_file)){
          server['stop'](options, function(){
-            server['start'](options, function(){ done() });
+            server['start'](options, function(){ done(); });
          });
        }else{
-         server['start'](options, function(){ done() });
+         server['start'](options, function(){ done(); });
        }
     }else{
-      server[action](options, function(){ done() }); //call start or stop
+      server[action](options, function(){ done(); }); //call start or stop
     }
   });
 };
