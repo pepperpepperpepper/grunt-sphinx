@@ -1,10 +1,10 @@
 {
   "name": "grunt-sphinx",
-  "description": "Start sphinx from your gruntfile",
-  "version": "0.0.1",
+  "description": "Control sphinx search from grunt and grunt watch",
+  "version": "0.1.0",
   "homepage": "https://github.com/pepperpepperpepper/grunt-sphinx",
   "author": {
-    "name": "pepper",
+    "name": "yo mama",
     "email": "pepper@scannerjammer.com"
   },
   "repository": {
@@ -20,23 +20,21 @@
       "url": "https://github.com/pepperpepperpepper/grunt-sphinx/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "^0.4.4",
-    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt": "~0.4.5"
   },
   "peerDependencies": {
-    "grunt": "~0.4.0"
+    "grunt": "~0.4.5"
   },
   "keywords": [
     "gruntplugin",
@@ -48,5 +46,5 @@
       "name": "pepper",
       "email": "pepper@scannerjammer.com"
     }
-  ],
+  ]
 }
