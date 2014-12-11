@@ -1,11 +1,3 @@
-/*
- * grunt-express-server
- * https://github.com/ericclemmons/grunt-express-server
- *
- * Copyright (c) 2013 Eric Clemmons
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 var get = require('./lib/get');

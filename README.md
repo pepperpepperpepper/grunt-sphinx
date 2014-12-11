@@ -53,6 +53,14 @@ grunt.loadNpmTasks('grunt-sphinx');
 
 ### Options 
 
+The options should be easily inferred from looking at the example Gruntfile config above. 
+Any valid command-line arguments can be passed to either the searchd or indexer command by means of the
+'args' option in the config block. The arguments must be listed as elements in the array.
+
+I'd be happy to add more options, such as a callback once the searchd command or indexer have completed,
+just submit an issue request. 
+
+
 
 #### Stopping and starting the searchd server
 

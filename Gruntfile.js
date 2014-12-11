@@ -14,14 +14,13 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
       },
     },
-    clean: {
-      tests: ['tmp'],
-    },
+//    clean: {
+//      tests: ['tmp'],
+//    },
     watch: {
       sphinx: {
         options: {
           spawn : false,
-//          reload: true,
         },
         files: [
           'sphinx.conf'
@@ -29,17 +28,18 @@ module.exports = function(grunt) {
         tasks: ['sphinx-searchd', 'sphinx-indexer']
       }
     },
-//{{{
     // Unit tests.
-//    nodeunit: {
-//      defaults: {
-//        src: 'test/defaults_test.js'
-//      },
-//      stoppable: {
-//        src: 'test/stoppable_test.js'
-//      }
-//    },
-//}}}
+    nodeunit: {
+      stop: {
+        src: 'test/stop.js'
+      },
+      start: {
+        src: 'test/start.js'
+      },
+      watch: {
+        src: 'test/watch.js'
+      },
+    },
     'sphinx-searchd': {
       //customize options here
       options: { 
@@ -68,8 +68,8 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-//  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+//  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
 //{{{ more test stuff
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
@@ -81,8 +81,6 @@ module.exports = function(grunt) {
 //  ]);
 //}}}
   // By default, lint and run all tests.
-//  grunt.registerTask('default', ['jshint', 'sphinx-indexer']);
-//  grunt.registerTask('default', ['jshint', 'sphinx-searchd', 'sphinx-indexer']);
   grunt.registerTask('default', ['jshint', 'sphinx-searchd','watch']);
 //  grunt.registerTask('default', ['jshint', 'test']);
 
