@@ -5,6 +5,12 @@ var path = require('path');
 module.exports = function(grunt) {
   grunt.registerTask('sphinx-indexer', 'run the sphinx indexer', function() {
 
+    var finished = function() {
+      if (done) {
+        done();
+        done = null;
+      }
+    };
     //DEFAULT OPTIONS GO HERE
     var options = this.options({
       cmd:           'indexer',
@@ -23,23 +29,11 @@ module.exports = function(grunt) {
 
       return false;
     }
-    grunt.log.writeln('Running '.green + (options.background ? 'background' : 'foreground') + ' Sphinx indexer cmd');
+    grunt.log.writeln('Running Sphinx indexer cmd'.green);
 
     var done = grunt.task.current.async();
 
-      var donefunc = function(error, result, code){
-        if (result){
-          if (result.code === 1){
-            if (result.stderr.match(/Error: not found:/)){
-              grunt.log.error("Could not find the indexer cmd, please specify its location in the Gruntfile!".red);
-              process.exit(1);
-            }else if(result.stdout.match(/ERROR: nothing to do./)){
-              grunt.log.writeln("Sphinx indexes have already been created.".grey);
-            }
-          }
-
-        }
-      };
+      var donefunc = finished;
       var cmd = grunt.util.spawn({
         cmd:      options.cmd,
         args:     options.args,
@@ -47,16 +41,31 @@ module.exports = function(grunt) {
         fallback: options.fallback
       }, donefunc);
 
-      if (options.debug) {
         cmd.stdout.on('data', function(data) {
-          grunt.log.error('debug is on');
           var message = "" + data;
-          grunt.log.error(message.yellow);
-          cmd.stdout.pipe(process.stdout);
-          cmd.stderr.pipe(process.stderr);
+          if (options.debug) {
+            grunt.log.error('debug is on'.yellow);
+            grunt.log.error(message.yellow);
+          }else{
+            if(message.match(/ERROR: nothing to do./)){
+              grunt.log.writeln("Sphinx indexes have already been created.".grey);
+            }
+          }
         });
-      }
+        cmd.stderr.on('data', function(data) {
+          var message = "" + data;
+          if (options.debug) {
+            grunt.log.error('debug is on'.yellow);
+            grunt.log.error(message.red);
+          }else{
+            if (message.match(/Error: not found:/)){
+              grunt.log.error("Could not find the indexer cmd, please specify its location in the Gruntfile!".red);
+              process.exit(1);
+            }
+            grunt.log.writeln(data.grey);
+          }
+        });
 
-    process.on('exit', donefunc);
+    process.on('exit', finished);
   });
 };

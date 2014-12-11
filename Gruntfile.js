@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     watch: {
       sphinx: {
         options: {
-          reload: true,
+          spawn : false,
+//          reload: true,
         },
         files: [
           'sphinx.conf'
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
         cmd : 'sphinx-searchd',               //REQUIRED
         debug : false,
         args : [], //any additional args to pass to the searchd command
+        watch_delay : 2000, //only required if used with the grunt watch task
       },
     },
     'sphinx-indexer': {
@@ -81,7 +83,7 @@ module.exports = function(grunt) {
   // By default, lint and run all tests.
 //  grunt.registerTask('default', ['jshint', 'sphinx-indexer']);
 //  grunt.registerTask('default', ['jshint', 'sphinx-searchd', 'sphinx-indexer']);
-  grunt.registerTask('default', ['sphinx-searchd','watch']);
+  grunt.registerTask('default', ['jshint', 'sphinx-searchd','watch']);
 //  grunt.registerTask('default', ['jshint', 'test']);
 
 };

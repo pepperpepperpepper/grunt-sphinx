@@ -24,26 +24,23 @@ Here's my example setup.
   grunt.initConfig({
     'sphinx-searchd': {
       //customize options here
-      defaults : {
-        options: { 
-          conf_file : '/etc/sphinx/sphinx.conf',  //REQUIRED
-          pid_file : 'sphinx/logs/searchd.pid',   //REQUIRED
-          cmd : 'sphinx-searchd',                 //REQUIRED
-          debug : false,
-          args : [], //any additional args to pass to the searchd command
-        },
-      }
+      options: { 
+        conf_file : 'sphinx.conf',            //REQUIRED
+        pid_file : 'sphinx/logs/searchd.pid', //REQUIRED
+        cmd : 'sphinx-searchd',               //REQUIRED
+        debug : false,
+        args : [], //any additional args to pass to the searchd command
+        watch_delay : 2000, //only required if used with the grunt watch task
+      },
     },
     'sphinx-indexer': {
-      defaults: {
-        //customize options here
-        options: { 
-          conf_file : '/etc/sphinx/sphinx.conf', // REQUIRED
-          cmd : 'sphinx-indexer',                // REQUIRED
-          indeces: [ '--all' ],                  // REQUIRED
-          debug : false,
-          args : [], //any additional args to pass to the indexer command
-        }
+      //customize options here
+      options: { 
+        conf_file : 'sphinx.conf',         // REQUIRED
+        cmd : 'sphinx-indexer',            // REQUIRED
+        indeces: [ '--all' ],              // REQUIRED
+        debug : false,
+        args : [], //any additional args to pass to the indexer command
       }
     }
   });
@@ -74,15 +71,15 @@ $> grunt sphinx-searchd:start
 grunt.initConfig({
   watch: {
     sphinx: {
-      files:  [ '**/*.js' ],
+      files:  [ 'sphinx.conf' ],
       tasks:  [ 'sphinx-searchd', 'sphinx-indexer' ],
       options: {
-        reload : true
+        spawn : false, // IMPORTANT. Will not work without this.
       }
     }
   }
 });
 
-grunt.registerTask('server', [ 'sphinx-indexer', 'sphinx-searchd', 'watch' ])
+grunt.registerTask('server', [ 'sphinx-indexer', 'sphinx-searchd', 'watch' ]);
 ```
 
