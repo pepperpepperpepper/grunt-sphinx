@@ -23,7 +23,9 @@ module.exports = function(grunt) {
 
     options.conf_file = path.resolve(options.conf_file);
     options.args.unshift('--config', options.conf_file);
-    
+
+    options.args.push.apply(options.args, options.indeces);
+
     if (!grunt.file.exists(options.conf_file)) {
       grunt.log.error('Could not find sphinx configuration file: ' + options.conf_file);
 
